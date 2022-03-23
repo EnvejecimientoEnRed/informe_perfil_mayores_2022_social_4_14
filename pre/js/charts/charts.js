@@ -28,7 +28,7 @@ export function initChart(iframe) {
             return d3.descending(+x.ratio, +y.ratio);
         });
 
-        let margin = {top: 20, right: 30, bottom: 40, left: 90},
+        let margin = {top: 20, right: 30, bottom: 40, left: 150},
             width = document.getElementById('chart').clientWidth - margin.left - margin.right,
             height = document.getElementById('chart').clientHeight - margin.top - margin.bottom;
 
@@ -40,7 +40,7 @@ export function initChart(iframe) {
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
         let x = d3.scaleLinear()
-            .domain([0, 30])
+            .domain([0, 12])
             .range([ 0, width]);
 
         svg.append("g")
@@ -53,7 +53,9 @@ export function initChart(iframe) {
                 .padding(.1);
 
         svg.append("g")
-            .call(d3.axisLeft(y));
+            .call(d3.axisLeft(y))
+            .selectAll('.tick text')
+            .style('text-transform', function(d,i) { if(data[i].tipo != 'prov') { return 'uppercase'; } });
 
         function init() {
             svg.selectAll("bars")
@@ -62,9 +64,9 @@ export function initChart(iframe) {
                 .append("rect")
                 .attr('class','bars')
                 .attr("x", x(0) )
-                .attr("y", function(d) { return y(d.ccaa_prov); })
+                .attr("y", function(d) { return y(d.ccaa_prov) + y.bandwidth() / 4; })
                 .attr("width", function(d) { return x(0); })
-                .attr("height", y.bandwidth() )
+                .attr("height", y.bandwidth() / 2 )
                 .attr("fill", function(d) {
                     if (d.tipo != 'nacional') {
                         return COLOR_PRIMARY_1;
@@ -112,7 +114,9 @@ export function initChart(iframe) {
 
         //Captura de pantalla de la visualización
         setChartCanvas();
-        setCustomCanvas();
+        setTimeout(() => {
+            setCustomCanvas();
+        }, 5000);        
 
         let pngDownload = document.getElementById('pngImage');
 
