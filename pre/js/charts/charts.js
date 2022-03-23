@@ -24,32 +24,104 @@ export function initChart(iframe) {
     d3.csv('https://raw.githubusercontent.com/CarlosMunozDiazCSIC/informe_perfil_mayores_2022_social_4_14/main/data/ratio_plazas_residencias_espana.csv', function(error,data) {
         if (error) throw error;
 
+        data.sort(function(x, y){
+            return d3.descending(+x.ratio, +y.ratio);
+        });
 
-    });
+        let margin = {top: 20, right: 30, bottom: 40, left: 90},
+            width = document.getElementById('chart').clientWidth - margin.left - margin.right,
+            height = document.getElementById('chart').clientHeight - margin.top - margin.bottom;
 
+        let svg = d3.select("#chart")
+        .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    //Animación del gráfico
-    document.getElementById('replay').addEventListener('click', function() {
-        animateChart();
-    });
+        let x = d3.scaleLinear()
+            .domain([0, 30])
+            .range([ 0, width]);
 
-    //Iframe
-    setFixedIframeUrl('informe_perfil_mayores_2022_social_4_14','plazas_residenciales');
+        svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x));
 
-    //Redes sociales > Antes tenemos que indicar cuál sería el texto a enviar
-    setRRSSLinks('plazas_residenciales');
+        let y = d3.scaleBand()
+                .range([ 0, height ])
+                .domain(data.map(function(d) { return d.ccaa_prov; }))
+                .padding(.1);
 
-    //Captura de pantalla de la visualización
-    setChartCanvas();
-    setCustomCanvas();
+        svg.append("g")
+            .call(d3.axisLeft(y));
 
-    let pngDownload = document.getElementById('pngImage');
+        function init() {
+            svg.selectAll("bars")
+                .data(data)
+                .enter()
+                .append("rect")
+                .attr('class','bars')
+                .attr("x", x(0) )
+                .attr("y", function(d) { return y(d.ccaa_prov); })
+                .attr("width", function(d) { return x(0); })
+                .attr("height", y.bandwidth() )
+                .attr("fill", function(d) {
+                    if (d.tipo != 'nacional') {
+                        return COLOR_PRIMARY_1;
+                    } else {
+                        return COLOR_ANAG_2;
+                    }
+                })
+                .transition()
+                .duration(2000)
+                .attr("width", function(d) { return x(+d.ratio); });
 
-    pngDownload.addEventListener('click', function(){
-        setChartCanvasImage('plazas_residenciales');
-        setChartCustomCanvasImage('plazas_residenciales');
-    });
+        }
 
-    //Altura del frame
-    setChartHeight(iframe);
+        function animateChart() {
+            svg.selectAll(".bars")
+                .attr("width", function(d) { return x(0); })
+                .transition()
+                .duration(2000)
+                .attr("width", function(d) { return x(+d.ratio); })
+        }
+
+        /////
+        /////
+        // Resto - Chart
+        /////
+        /////
+        init();
+
+        //Animación del gráfico
+        document.getElementById('replay').addEventListener('click', function() {
+            animateChart();
+        });
+
+        /////
+        /////
+        // Resto
+        /////
+        /////
+
+        //Iframe
+        setFixedIframeUrl('informe_perfil_mayores_2022_social_4_14','plazas_residenciales');
+
+        //Redes sociales > Antes tenemos que indicar cuál sería el texto a enviar
+        setRRSSLinks('plazas_residenciales');
+
+        //Captura de pantalla de la visualización
+        setChartCanvas();
+        setCustomCanvas();
+
+        let pngDownload = document.getElementById('pngImage');
+
+        pngDownload.addEventListener('click', function(){
+            setChartCanvasImage('plazas_residenciales');
+            setChartCustomCanvasImage('plazas_residenciales');
+        });
+
+        //Altura del frame
+        setChartHeight(iframe);
+    });    
 }
