@@ -28,7 +28,7 @@ export function initChart(iframe) {
             return d3.descending(+x.ratio, +y.ratio);
         });
 
-        let margin = {top: 20, right: 30, bottom: 40, left: 150},
+        let margin = {top: 20, right: 20, bottom: 20, left: 140},
             width = document.getElementById('chart').clientWidth - margin.left - margin.right,
             height = document.getElementById('chart').clientHeight - margin.top - margin.bottom;
 
