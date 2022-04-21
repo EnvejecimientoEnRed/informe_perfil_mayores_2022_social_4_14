@@ -21,7 +21,7 @@ export function initChart(iframe) {
             return d3.descending(+x.ratio, +y.ratio);
         });
 
-        let margin = {top: 10, right: 10, bottom: 20, left: 90},
+        let margin = {top: 10, right: 10, bottom: 20, left: 102.5},
             width = document.getElementById('chart').clientWidth - margin.left - margin.right,
             height = document.getElementById('chart').clientHeight - margin.top - margin.bottom;
 
@@ -72,7 +72,9 @@ export function initChart(iframe) {
                 .data(data)
                 .enter()
                 .append("rect")
-                .attr('class','rect')
+                .attr('class',function(d) {
+                    return 'rect ' + d.ccaa_prov;
+                })
                 .attr("x", x(0) )
                 .attr("y", function(d) { return y(d.ccaa_prov) + y.bandwidth() / 4; })
                 .attr("width", function(d) { return x(0); })
@@ -92,6 +94,11 @@ export function initChart(iframe) {
                     });
                     this.style.opacity = '1';
 
+                    //Display texto
+                    let currentItem = this.classList[1];
+                    let textItem = document.getElementsByClassName('text-'+currentItem)[0];
+                    textItem.style.display = 'block';
+
                     //Texto
                     // let html = '<p class="chart__tooltip--title">' + d.NOMAUTO_2 + '</p>' + 
                     // '<p class="chart__tooltip--text">Un ' + numberWithCommas3(parseFloat(d.porc_total_grupo).toFixed(1)) + '% de habitantes de esta autonomía tiene 65 años o más.</p>' +
@@ -100,8 +107,8 @@ export function initChart(iframe) {
                     // tooltip.html(html);
 
                     //Tooltip
-                    positionTooltip(window.event, tooltip);
-                    getInTooltip(tooltip);
+                    // positionTooltip(window.event, tooltip);
+                    // getInTooltip(tooltip);
                 })
                 .on('mouseout', function(d,i,e) {
                     //Quitamos los estilos de la línea
@@ -109,13 +116,32 @@ export function initChart(iframe) {
                     bars.each(function() {
                         this.style.opacity = '1';
                     });
+
+                    //Display texto
+                    let currentItem = this.classList[1];
+                    let textItem = document.getElementsByClassName('text-'+currentItem)[0];
+                    textItem.style.display = 'none';
                 
                     //Quitamos el tooltip
-                    getOutTooltip(tooltip);
+                    //getOutTooltip(tooltip);
                 })
                 .transition()
                 .duration(2000)
                 .attr("width", function(d) { return x(+d.ratio); });
+
+            //Prueba texto
+            svg.selectAll('texto')
+                .data(data)
+                .enter()
+                .append('text')
+                .attr('class', function(d) {
+                    return 'text text-' + d.ccaa_prov;
+                })
+                .attr("x", function(d) { return x(+d.ratio) + 5; })
+                .attr("y", function(d) { return y(d.ccaa_prov) + 6.5; })
+                .attr("dy", ".35em")
+                .style('display','none')
+                .text(function(d) { return numberWithCommas3(d.ratio) + '%'; });            
         }
 
         function animateChart() {

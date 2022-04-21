@@ -184,6 +184,15 @@ button {
                     stroke-dasharray: 0 !important;
                     stroke-width: 1px !important;
                 }
+
+                & text {
+                    font-family: 'Montserrat';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 14px;
+                
+                    color: #262626;
+                }
             }            
         }
 
