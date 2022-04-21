@@ -62,6 +62,7 @@ export function initChart(iframe) {
         let yAxis = function(svg) {
             svg.call(d3.axisLeft(y));
             svg.call(function(g){g.selectAll('.tick line').remove()});
+            svg.call(function(g){g.selectAll('.domain').remove()});
         }
 
         svg.append("g")
