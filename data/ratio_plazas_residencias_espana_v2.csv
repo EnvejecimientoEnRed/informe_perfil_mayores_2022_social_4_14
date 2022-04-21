@@ -1,0 +1,64 @@
+ccaa_prov,tipo,ratio
+Las Palmas,prov,1.7
+Canarias,ccaa,2.1
+Ceuta,ccaa,2.1
+Pontevedra,prov,2.3
+Murcia,ccaa,2.3
+S. C. de Tenerife,prov,2.4
+Alicante,prov,2.4
+A Coruña,prov,2.5
+Málaga,prov,2.5
+Cádiz,prov,2.6
+Huelva,prov,2.7
+Castellón,prov,2.7
+Sevilla,prov,2.8
+Balears (Illes),ccaa,2.7
+Comunitat Valenciana,ccaa,2.8
+Melilla,ccaa,2.9
+Andalucía,ccaa,3.0
+Valencia,prov,3.1
+Galicia,ccaa,3.1
+Almería,prov,3.2
+Granada,prov,3.2
+Gipuzkoa,prov,3.5
+Córdoba,prov,3.7
+Jaén,prov,3.9
+Tarragona,prov,3.9
+Girona,prov,3.9
+País Vasco,ccaa,4.1
+ESPAÑA,nacional,4.2
+Lugo,prov,4.2
+Barcelona,prov,4.3
+Cataluña,ccaa,4.3
+Madrid,ccaa,4.3
+Bizkaia,prov,4.4
+Álava,prov,4.6
+Navarra,ccaa,4.7
+Albacete,prov,4.8
+La Rioja,ccaa,4.8
+Cantabria,ccaa,4.8
+Badajoz,prov,5.0
+Asturias,ccaa,5.5
+Lleida,prov,5.7
+Ourense,prov,5.9
+Zaragoza,prov,5.9
+Ciudad Real,prov,6.1
+León,prov,6.1
+Valladolid,prov,6.3
+Aragón,ccaa,6.3
+Extremadura,ccaa,6.5
+Huesca,prov,6.9
+C.-La Mancha,ccaa,7.2
+C. y León,ccaa,7.6
+Burgos,prov,7.8
+Cuenca,prov,7.9
+Zamora,prov,8.1
+Teruel,prov,8.2
+Salamanca,prov,8.3
+Toledo,prov,8.4
+Segovia,prov,8.5
+Cáceres,prov,8.6
+Ávila,prov,8.7
+Guadalajara,prov,9.5
+Palencia,prov,10.4
+Soria,prov,11.0

@@ -28,14 +28,17 @@
                         </button>
                     </div>                  
                 </div>
-                <div class="chart__viz" id="chart"></div>
+                <div class="chart__viz">                 
+                    <div class="chart--viz" id="chart"></div>
+                    <p class="text__xaxis" id="texto-reactivo">Porcentaje</p>
+                </div>
                 <!-- Pie de gráfico -->
                 <div class="chart__footer">
                     <div class="chart__source">
-                        <p class="chart__source--data"><span>Fuente: </span><span id="data-source">Envejecimiento en Red (base de datos de residencias)</span> y Laboratorio de Estadísticas Experimentales (CSIC)</p>
+                        <p class="chart__source--data"><span>Fuente: </span><span>Envejecimiento en Red (base de datos de residencias; consulta en febrero de 2022)</span> y Laboratorio de Estadísticas Experimentales (CSIC)</p>
                         <p class="chart__source--copyright"><a class="link" href="https://creativecommons.org/licenses/by/4.0/deed.en_US" target="_blank">CC BY 4.0</a></p>
                     </div>
-                    <p class="chart__note"><span>Notas: </span><span id="data-note">Las comunidades autónomas se muestran en mayúsculas en el eje Y; las provincias, en minúscula.</span></p>
+                    <p class="chart__note"><span>Notas: </span><span>Las comunidades autónomas se muestran en mayúsculas en el eje Y; las provincias, en minúscula. Por razones de espacio, se ha optado por simplificar algunas nombres de provincias y comunidades.</span></p>
                 </div>
                 <div class="logo">
                     <img src="https://raw.githubusercontent.com/CarlosMunozDiazCSIC/informe_perfil_mayores_2022_social_4_14/main/pre/iegd_logo.png" alt="Logo del Instituto de Economía, Geografía y Demografía (IEGD) del CSIC" width="100%" height="100%">
@@ -87,10 +90,7 @@
                 <li class="tab tab--rrss" data-target="b-rrss"><i class="fa fa--share fa-share-alt"></i></li>
             </ul>
         </nav>
-        <div class="chart__tooltip" id="tooltip">
-            <p class="chart__tooltip--title"></p>
-            <p class="chart__tooltip--text"></p>
-        </div>  
+        <div class="chart__tooltip" id="tooltip"></div>  
     </div>
     <!-- Uso de PYMJS para alturas dinámicas -->
     <script type="text/javascript" src="https://pym.nprapps.org/pym.v1.min.js"></script>
