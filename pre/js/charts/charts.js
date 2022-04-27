@@ -21,7 +21,7 @@ export function initChart() {
             return d3.descending(+x.ratio, +y.ratio);
         });
 
-        let margin = {top: 10, right: 10, bottom: 20, left: 102.5},
+        let margin = {top: 10, right: 10, bottom: 25, left: 106.5},
             width = document.getElementById('chart').clientWidth - margin.left - margin.right,
             height = document.getElementById('chart').clientHeight - margin.top - margin.bottom;
 
@@ -63,6 +63,9 @@ export function initChart() {
             svg.call(d3.axisLeft(y));
             svg.call(function(g){g.selectAll('.tick line').remove()});
             svg.call(function(g){g.selectAll('.domain').remove()});
+            svg.selectAll('.tick text')
+                .style('text-transform', function(d,i) { if(data[i].tipo != 'prov') { return 'uppercase'; } })
+                .style('font-weight', 400);
         }
 
         svg.append("g")
