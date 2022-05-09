@@ -103,11 +103,12 @@ export function initChart() {
                     // let textItem = document.getElementsByClassName('text-'+currentItem)[0];
                     // textItem.style.display = 'block';
 
+                    console.log(d);
+
                     //Texto
-                    let tipo = d.tipo == 'prov' ? 'provinica' : 'autonomía';
-                    let html = '<p class="chart__tooltip--title">' + d.NOMAUTO_2 + '</p>' + 
-                    '<p class="chart__tooltip--text">Un ' + numberWithCommas3(parseFloat(d.porc_total_grupo).toFixed(1)) + '% de habitantes de esta ' + tipo + ' tiene 65 años o más.</p>' +
-                    '<p class="chart__tooltip--text">En cuanto a la división por sexos, un ' + numberWithCommas3(parseFloat(d.porc_total_hombres).toFixed(1)) + '% de los hombres y un ' + numberWithCommas3(parseFloat(d.porc_total_mujeres).toFixed(1)) + '% de las mujeres tiene 65 o más.</p>';
+                    let tipo = d.tipo == 'prov' ? 'provincia' : 'autonomía';
+                    let html = '<p class="chart__tooltip--title">' + d.ccaa_prov + '</p>' + 
+                    '<p class="chart__tooltip--text">Hay <b>' + numberWithCommas3(parseFloat(d.ratio).toFixed(1)) + '</b> plazas de residencias por cada 100 habitantes en esta ' + tipo + '</p>';
             
                     tooltip.html(html);
 
